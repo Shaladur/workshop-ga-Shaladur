@@ -1,0 +1,32 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - dev
+      - main
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Say hello world
+      run: echo "Welcome to the Github Actions workshop!"
+
+  unit-test:
+    runs-on: ubuntu-20.04
+    container:
+      image: epitechcontent/epitest-docker
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Run unit-tests
+      run: |
+        make tests_run
+
+    - name: Run coverage
+      run: |
+        make coverage
